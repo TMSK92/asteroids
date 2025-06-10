@@ -2,6 +2,7 @@
 # the open-source pygame library
 # throughout this file
 import pygame
+from sys import exit
 
 from constants import *
 from player import Player
@@ -37,6 +38,11 @@ def main():
 
         updatable.update(dt)
 
+        for asteroid in asteroids:
+            if asteroid.collision(player):
+                print("Game Over!")
+                exit()
+
         screen.fill((0,0,0))
 
         for obj in drawable:
@@ -44,7 +50,7 @@ def main():
 
         pygame.display.flip()
         
-        dt = clock.tick(60) / 1000
+        dt = clock.tick(60) / 1000 #FPS limited to 60
 
 if __name__ == "__main__":
     main()
